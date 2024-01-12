@@ -438,6 +438,7 @@ struct LayoutHelper<'a> {
     cap_cursor: usize,
 }
 
+#![feature(int_roundings)]
 impl<'a> LayoutHelper<'a> {
     fn new(parameter_types: &'a ParameterTypes) -> Self {
         Self {
