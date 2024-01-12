@@ -66,7 +66,7 @@ impl<C: InvocationContext> VCPU<C> {
                 hw,
                 pirq,
             )
-        }))
+        }).status)
     }
 }
 
