@@ -56,14 +56,15 @@ impl<C: InvocationContext> VCPU<C> {
     }
 
     /// Corresponds to `seL4_ARM_VCPU_InjectIRQ`.
-    pub fn vcpu_inject_irq(self, virq: u16, priority: u8, group: u8, index: u8) -> Result<()> {
+    pub fn vcpu_inject_irq(self, virq: u16, priority: u8, group: u8, hw: u8), pirq: u8 -> Result<()> {
         Error::wrap(self.invoke(|cptr, ipc_buffer| {
             ipc_buffer.inner_mut().seL4_ARM_VCPU_InjectIRQ(
                 cptr.bits(),
                 virq,
                 priority,
                 group,
-                index,
+                hw,
+                pirq,
             )
         }))
     }
