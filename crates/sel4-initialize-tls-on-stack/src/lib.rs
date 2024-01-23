@@ -27,7 +27,7 @@ pub struct TlsImage {
     pub memsz: usize,
     pub align: usize,
 }
-
+#[feature(int_roundings)]
 impl TlsImage {
     #[allow(clippy::missing_safety_doc)]
     pub unsafe fn initialize_on_stack_and_continue(&self, cont_fn: ContFn, cont_arg: ContArg) -> ! {
