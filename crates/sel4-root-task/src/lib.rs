@@ -14,7 +14,7 @@ use core::fmt;
 #[cfg(target_thread_local)]
 use core::ffi::c_void;
 
-pub use sel4_panicking_env::{abort, debug_print, debug_println};
+pub use sel4_panicking_env::{abort, debug_print, debug_println, debug_put_char};
 pub use sel4_root_task_macros::root_task;
 
 #[doc(inline)]
@@ -95,7 +95,7 @@ pub unsafe fn run_main<T>(
 
 #[no_mangle]
 fn sel4_runtime_debug_put_char(c: u8) {
-    sel4::debug_put_char(c as c_char)
+    debug_put_char(c as c_char)
 }
 
 #[macro_export]
