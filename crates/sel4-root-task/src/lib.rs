@@ -95,7 +95,7 @@ pub unsafe fn run_main<T>(
 
 #[no_mangle]
 fn sel4_runtime_debug_put_char(c: u8) {
-    debug_put_char(c as c_char)
+    debug_put_char((c as c_char).try_into().unwrap())
 }
 
 #[macro_export]
