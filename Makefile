@@ -170,3 +170,27 @@ check-exhaustively: check-immediately
 check-oneshot: check-immediately
 	$(MAKE) run-tests
 	$(MAKE) everything-with-excess
+
+url:="https://github.com/vcll2/rust-sel4"
+my_sel4_prefix:=/home/vv/rust/tos_clean_new/build/staging
+my_project_local_cargo_root:=/home/vv/rust
+
+.PHONY: kernel-loader
+kernel-loader:
+	CC=aarch64-linux-gnu-gcc \
+	SEL4_PREFIX=$(my_sel4_prefix) \
+    		cargo install \
+        		-Z unstable-options \
+		        -Z build-std=core,alloc,compiler_builtins \
+		        -Z build-std-features=compiler-builtins-mem \
+		        --target aarch64-unknown-none \
+		        --root $(my_project_local_cargo_root) \
+		        --git $(url) \
+		        sel4-kernel-loader
+
+.PHONY: kernel-loader-add-payload
+kernel-loader-add-payload: 
+	cargo install \
+	    --root $(my_project_local_cargo_root) \
+    	    --git $(url) \
+            sel4-kernel-loader-add-payload
