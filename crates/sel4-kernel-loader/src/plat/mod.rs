@@ -28,7 +28,7 @@ mod qemu_arm_virt;
 mod riscv_generic;
 
 #[allow(unused_imports)]
-pub(crate) use imp::*;
+// pub(crate) use imp::*;
 
 pub(crate) trait Plat {
     fn init() {}

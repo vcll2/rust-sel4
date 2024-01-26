@@ -150,13 +150,14 @@ fn mk_loader_map() -> String {
 // HACK
 fn get_device_regions() -> Vec<Range<u64>> {
     let page = |start| start..start + GRANULE_SIZE;
+    println!("current platform is = {}", sel4_cfg_str!(PLAT));
     match sel4_cfg_str!(PLAT) {
         "qemu-arm-virt" => vec![page(0x0900_0000)],
         "bcm2711" => vec![page(0x0000_0000), page(0xfe21_5000)],
         "spike" => vec![],
         "qemu-riscv-virt" => vec![],
-        _ => vec![],
-        // _ => panic!("unsupported platform"),
+        _ => panic!("unsupported platform {}", sel4_cfg_str!(PLAT)),
+        // _ => vec![],
     }
 }
 
